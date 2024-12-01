@@ -2,9 +2,11 @@
 name = "aoc2024"
 version = "0.1.0"
 edition = "2021"
+authors = ["Eduard Bondarenko <edbond@gmail.com>"]
+
+[lib]
+bench = false
 
 [dependencies]
-
-[[bin]]
-name = "day1"
-path = "src/day1.rs"
+aoc-runner = "0.3.0"
+aoc-runner-derive = "0.3.0"
