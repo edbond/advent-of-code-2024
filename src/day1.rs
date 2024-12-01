@@ -14,14 +14,14 @@ fn parse_input(input: &str) -> Day1Input {
     let mut right = vec![];
 
     input.lines().for_each(|line| {
-        let nums: Vec<&str> = line.trim().split_whitespace().collect();
+        let nums: Vec<&str> = line.split_whitespace().collect();
 
         let left_num: i64 = nums[0]
             .parse()
-            .expect(format!("can't parse left number {}", nums[0]).as_str());
+            .unwrap_or_else(|_| panic!("can't parse left number {}", nums[0]));
         let right_num: i64 = nums[1]
             .parse()
-            .expect(format!("can't parse right number {}", nums[1]).as_str());
+            .unwrap_or_else(|_| panic!("can't parse right number {}", nums[1]));
 
         left.push(left_num);
         right.push(right_num);
