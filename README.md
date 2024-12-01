@@ -7,6 +7,17 @@
 3. Run `cargo aoc input` to download inputs to `input/` folder
 4. Run `cargo aoc` to run solutions
 
+```shell
+AOC 2024
+Day 1 - Part 1 : <answer>
+	generator: 137.208µs,
+	runner: 29.959µs
+
+Day 1 - Part 2 : <answer>
+	generator: 130.625µs,
+	runner: 48.5µs
+```
+
 ## Benchmarks
 
 Run `cargo aoc bench` to run benchmarks
