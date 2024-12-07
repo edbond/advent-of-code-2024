@@ -46,19 +46,19 @@ fn garbage(input: &str) -> IResult<&str, char> {
 }
 
 #[derive(Debug)]
-enum PatternType<'a> {
+enum PatternType {
     Mul((u64, u64)),
-    Do(&'a str),
-    Dont(&'a str),
-    Garbage(char),
+    Do(()),
+    Dont(()),
+    Garbage(()),
 }
 
 // Combined parser for any valid pattern
 fn pattern(input: &str) -> IResult<&str, PatternType> {
     alt((
         |input| mul_numbers(input).map(|(next, (a, b))| (next, PatternType::Mul((a, b)))),
-        |input| do_(input).map(|(next, res)| (next, PatternType::Do(res))),
-        |input| dont(input).map(|(next, res)| (next, PatternType::Dont(res))),
+        |input| do_(input).map(|(next, _res)| (next, PatternType::Do(()))),
+        |input| dont(input).map(|(next, _res)| (next, PatternType::Dont(()))),
     ))(input)
 }
 
@@ -66,13 +66,13 @@ fn pattern(input: &str) -> IResult<&str, PatternType> {
 pub fn dot(input: &str) -> u64 {
     let mut parser = many0(alt((
         |input| pattern(input),
-        |input| garbage(input).map(|(next, res)| (next, PatternType::Garbage(res))),
+        |input| garbage(input).map(|(next, _res)| (next, PatternType::Garbage(()))),
     )));
 
     let mut enabled = true;
     let mut sum: u64 = 0;
 
-    let (extra, instructions) = parser(input).expect("parsed successfully");
+    let (_extra, instructions) = parser(input).expect("parsed successfully");
 
     // println!("{:?} \nextra: {:?}", instructions, extra);
 
